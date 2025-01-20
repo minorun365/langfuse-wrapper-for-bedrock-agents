@@ -1,0 +1,26 @@
+graph TD
+    T[Trace: 'bedrock-multi-agent-chat']
+    T --> S1[Span: 'main-agent-processing']
+    
+    S1 --> G1[Generation: 'initial-query-handling'<br>model: 'claude-3-sonnet'<br>input: 'langfuseにトレースを送る方法は？']
+    
+    S1 --> S2[Span: 'parallel-agent-execution']
+    
+    S2 --> S3[Span: 'bedrock-doc-agent'<br>metadata: agent='WTUNXUZDAV']
+    S3 --> G2[Generation: 'document-search'<br>input: 'Amazon Bedrockでの<br>トレーシング情報を検索']
+    
+    S2 --> S4[Span: 'web-search-agent'<br>metadata: agent='IHARRQYHB5']
+    S4 --> G3[Generation: 'web-search'<br>input: 'langfuseとトレーシング機能<br>について検索']
+    S4 --> E1[Event: 'tavily-search-execution']
+    
+    S1 --> G4[Generation: 'final-response'<br>model: 'claude-3-sonnet'<br>input: '両エージェントからの<br>情報を統合して回答']
+
+    classDef trace fill:#f9f,stroke:#333,stroke-width:2px
+    classDef span fill:#bbf,stroke:#333,stroke-width:1px
+    classDef generation fill:#bfb,stroke:#333,stroke-width:1px
+    classDef event fill:#fbb,stroke:#333,stroke-width:1px
+    
+    class T trace
+    class S1,S2,S3,S4 span
+    class G1,G2,G3,G4 generation
+    class E1 event
