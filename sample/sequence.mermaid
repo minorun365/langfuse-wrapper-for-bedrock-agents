@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant User
+    participant Main as MainAgent<br>(P9QCGAJJ3U)
+    participant Bedrock as BedrockDoc<br>(WTUNXUZDAV)
+    participant Web as WebSearch<br>(IHARRQYHB5)
+    
+    User->>Main: bedrockエージェントでlangfuseにトレースを送る方法は？
+
+    rect rgb(240, 240, 240)
+        Note over Main: 情報収集の計画立案
+        Main->>Bedrock: Amazon Bedrockでのトレーシング<br>やモニタリングの方法を質問
+        Main->>Web: langfuseとトレーシング機能<br>について質問
+    end
+
+    rect rgb(230, 240, 255)
+        Note over Bedrock: Knowledge Base<br>検索実行
+        Bedrock-->>Main: 関連情報なしと回答
+    end
+
+    rect rgb(255, 240, 230)
+        Note over Web: Tavily Search<br>API実行
+        Web->>Web: langfuseに関する<br>Web検索実行
+        Web-->>Main: langfuseの機能と<br>Bedrock連携情報を回答
+    end
+
+    rect rgb(240, 255, 240)
+        Note over Main: 情報を統合して<br>回答を生成
+        Main-->>User: langfuseとBedrock連携の<br>実装手順を説明
+    end
